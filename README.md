@@ -57,7 +57,27 @@ You can add more mappings by adding `org/corfield/rephrase-user.edn` to your
 classpath with the same structure as `config.edn`.
 See [the source](https://github.com/seancorfield/rephrase/blob/main/resources/org/corfield/rephrase/config.edn)
 for details.
-_More detailed documentation on customization will be provided in the future._
+
+Configuration is available under four keys in the EDN file:
+* `:ex-types` - a hash map from exception class names (as symbols) to friendly names (as strings); this is used to rephrase the exception type itself in the error message.
+* `:inline-types` - a vector of pairs: each pair is typically a class name (as a regex string) and a friendly name (as a replacement string); this is used to replace occurrences of the class name in the exception message with the friendly name.
+* `:removals` - a vector of regex strings; any occurrence of these strings in the exception message will be removed.
+* `:ex-messages` - a vector of pairs (but see below): each pair is a regex string and a replacement string; this is used to rephrase specific messages to more beginner-friendly versions.
+
+The `:ex-types` mapping is applied independently to the exception type.
+
+The exception message is rephrased by mapping the `:inline-types` first, 
+then applying the `:removals`, and finally applying the `:ex-messages` 
+replacements. All three of these are applied in the order they are defined
+in the configuration files (default first, then any user mappings), so more
+specific mappings should come first, then more general ones. All mappings
+are applied -- rephrasing does not stop after the first match.
+
+The pairs in `:ex-messages` may have an optional third element, a symbol, that
+indicates the mapping should only be applied to messages of a specific exception 
+type. If the symbol is present, the mapping will only be applied if the 
+original exception type matches the symbol (i.e., before rephrasing via `:ex-types`).
+This allows for more specific rephrasings that only apply to certain exception types, while still allowing more general rephrasings to apply to all messages.
 
 ## Inspiration
 
