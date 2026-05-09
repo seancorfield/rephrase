@@ -30,7 +30,7 @@
       (expect (re-find #" - runtime error \(unexpected type\)\.\n$" output))
       (expect (re-find #"^Expected a number, but was given a keyword, at " output))))
 
-  (it "does not rephrase an ArityException"
+  (it "rephrases an ArityException"
     (let [output
           (with-out-str
             (binding [*err* *out*]
@@ -43,9 +43,9 @@
                           (catch Exception e (caught-fn e)))
                      (expect false "Unexpected op")))))
                {:op "eval" :code "(/)"})))]
-      (expect (re-find #" - runtime error \(ArityException\)\.\n$" output))
+      (expect (re-find #" - runtime error \(incorrect number of arguments\)\.\n$" output))
       (expect (re-find #"^/ was called with no arguments, but it requires at least one argument, at " output)))))
 
 (comment
-  (def output "Wrong number of args (0) passed to: clojure.core//, at org.corfield.rephrase.nrepl-test/eval21928 (nrepl_test.clj:48) - runtime error (ArityException).\n")
+  (def output "Wrong number of args (0) passed to: clojure.core//, at org.corfield.rephrase.nrepl-test/eval21928 (nrepl_test.clj:48) - runtime error (incorrect number of arguments).\n")
   )

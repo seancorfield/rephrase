@@ -8,6 +8,8 @@
             [clojure.spec.alpha :as spec]
             [clojure.string :as str]))
 
+(set! *warn-on-reflection* true)
+
 (def ^:private ex-str-replacements
   (delay (->> (io/resource "org/corfield/rephrase/config.edn")
               (slurp)

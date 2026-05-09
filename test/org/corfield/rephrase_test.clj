@@ -15,10 +15,10 @@
       (expect (re-find #" - runtime error \(unexpected type\)\.\n$" output))
       (expect (re-find #"^Expected a number, but was given a string, at " output))))
 
-  (it "does not rephrase an ArityException"
+  (it "rephrases an ArityException"
     (let [output
           (with-out-str
             (binding [*err* *out*]
               (sut/repl-caught (clojure.lang.ArityException. 0 "clojure.core//"))))]
-      (expect (re-find #" - runtime error \(ArityException\)\.\n$" output))
+      (expect (re-find #" - runtime error \(incorrect number of arguments\)\.\n$" output))
       (expect (re-find #"^/ was called with no arguments, but it requires at least one argument, at " output)))))

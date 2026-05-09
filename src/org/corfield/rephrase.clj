@@ -4,8 +4,11 @@
   (:require [clojure.main :refer [ex-triage]]
             [org.corfield.rephrase.ex-str :as ex-str]))
 
+(set! *warn-on-reflection* true)
+
 (defn- rephrase-err->msg
-  "Helper to return an error message string from an exception."
+  "Helper to return an error message string from an exception.
+   Copied from `clojure.main`, updated to call our custom 'to string'."
   [^Throwable e]
   (-> e
       Throwable->map

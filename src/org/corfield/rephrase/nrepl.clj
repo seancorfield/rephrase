@@ -5,6 +5,8 @@
             [nrepl.middleware.caught :as caught]
             [org.corfield.rephrase :as rephrase]))
 
+(set! *warn-on-reflection* true)
+
 (defn wrap-rephrase
   "nREPL middleware that rephrases exceptions to be more beginner-friendly."
   [h]

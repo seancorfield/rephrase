@@ -1,5 +1,6 @@
 {:ex-types
- {java.lang.ClassCastException "unexpected type"
+ {clojure.lang.ArityException "incorrect number of arguments"
+  java.lang.ClassCastException "unexpected type"
   java.lang.NullPointerException "'nil' encountered"}
 
  :inline-types
