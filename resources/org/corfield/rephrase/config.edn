@@ -6,10 +6,11 @@
   ["clojure.lang.Keyword" "a keyword"]
   ["clojure.lang.IPersistentVector" "a vector"]
   ["clojure.lang.IPersistentMap" "a map"]
-  ["java.lang.Number" "a number"]]
+  ["java.lang.Number" "a number"]
+  ["java.lang.String" "a string"]]
 
  :removals
- [" \\(.*is in unnamed module.*\\)$"
+ [" \\([^()]*is in unnamed module[^()]*\\)$"
   "clojure\\.lang\\."
   "java\\.lang\\."]
 

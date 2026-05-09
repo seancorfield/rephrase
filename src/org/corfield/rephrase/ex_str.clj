@@ -57,7 +57,8 @@
                            class-name))
         cause-type (if (contains? #{"Exception" "RuntimeException"} simple-class)
                      "" ;; omit, not useful
-                     (str " (" simple-class ")"))]
+                     (str " (" simple-class ")"))
+        cause (when cause (str/replace cause #"\n$" ""))]
     (case phase
       :read-source
       (format "Syntax error: %s, at (%s).%n" cause loc)
@@ -130,5 +131,4 @@
   (-> ex-map
       (update :clojure.error/class rephrase-ex-type)
       (update :clojure.error/cause rephrase-message)
-      (doto tap>)
       rephrase-ex-str))

@@ -12,15 +12,13 @@
           (with-out-str
             (binding [*err* *out*]
               (sut/repl-caught (ClassCastException. "class java.lang.String cannot be cast to class java.lang.Number"))))]
-      (expect (re-find #"^Execution error \(UnexpectedType\).*" output))
-      (expect (re-find #".*Expected Number but got String\n$" output))))
+      (expect (re-find #" - runtime error \(UnexpectedType\)\.\n$" output))
+      (expect (re-find #"^Expected a number, but was given a string, at " output))))
 
   (it "does not rephrase an ArityException"
     (let [output
           (with-out-str
             (binding [*err* *out*]
-              (sut/repl-caught (clojure.lang.ArityException. 0
-                                (str "Execution error (ArityException) at org.corfield.rephrase-test/...\n"
-                                     "Wrong number of args (0) passed to: clojure.core//\n")))))]
-      (expect (re-find #"^Execution error \(ArityException\).*" output))
-      (expect (re-find #".*Wrong number of args \(0\) passed to: clojure.core//\n$" output)))))
+              (sut/repl-caught (clojure.lang.ArityException. 0 "clojure.core//"))))]
+      (expect (re-find #" - runtime error \(ArityException\)\.\n$" output))
+      (expect (re-find #"^Wrong number of args \(0\) passed to: clojure.core//, at " output)))))

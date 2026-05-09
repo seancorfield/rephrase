@@ -27,8 +27,8 @@
                           (catch Exception e (caught-fn e)))
                      (expect false "Unexpected op")))))
                {:op "eval" :code "(+ 1 :one)"})))]
-      (expect (re-find #"^Execution error \(UnexpectedType\).*" output))
-      (expect (re-find #".*Expected Number but got Keyword\n$" output))))
+      (expect (re-find #" - runtime error \(UnexpectedType\)\.\n$" output))
+      (expect (re-find #"^Expected a number, but was given a keyword, at " output))))
 
   (it "does not rephrase an ArityException"
     (let [output
@@ -43,5 +43,9 @@
                           (catch Exception e (caught-fn e)))
                      (expect false "Unexpected op")))))
                {:op "eval" :code "(/)"})))]
-      (expect (re-find #"^Execution error \(ArityException\).*" output))
-      (expect (re-find #".*Wrong number of args \(0\) passed to: clojure.core//\n$" output)))))
+      (expect (re-find #" - runtime error \(ArityException\)\.\n$" output))
+      (expect (re-find #"^Wrong number of args \(0\) passed to: clojure.core//, at " output)))))
+
+(comment
+  (def output "Wrong number of args (0) passed to: clojure.core//, at org.corfield.rephrase.nrepl-test/eval21928 (nrepl_test.clj:48) - runtime error (ArityException).\n")
+  )
