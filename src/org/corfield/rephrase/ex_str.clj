@@ -27,12 +27,6 @@
   (let [type-map (:ex-types @ex-str-replacements)]
     (get type-map (symbol clazz) clazz)))
 
-(comment
-  #_{:clj-kondo/ignore [:type-mismatch]}
-  (* 1 'two)
-  (/ 42 (- 13 10 3))
-  )
-
 (defn- rephrase-message
   "Return a more user-friendly message for certain exception messages."
   [msg clazz]

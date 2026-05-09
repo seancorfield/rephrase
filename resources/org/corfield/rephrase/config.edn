@@ -55,8 +55,12 @@
   "java\\.util\\."]
 
  :ex-messages
- [["^Unable to resolve symbol: (.*) in this context$"
+ [["^Unable to resolve symbol: (catch|def|do|if|quote|recur|throw|try|var) in this context$"
+   "$1 is a special form, and cannot be used by itself or passed as an argument to a function"]
+  ["^Unable to resolve symbol: (.*) in this context$"
    "the name $1 is not defined"]
+  ["^Can't take value of a macro: #'(.*)$"
+   "$1 is a macro, and cannot be used by itself or passed as an argument to a function"]
   ["^class (.*) cannot be cast to class (.*)$"
    "Expected $2, but was given $1"]
   ["^Cannot cast (.*) to (.*)$"
