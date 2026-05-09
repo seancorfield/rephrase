@@ -10,10 +10,16 @@
 
 (set! *warn-on-reflection* true)
 
+(defn- merger [a b]
+  (if (map? a) (merge a b) (into a b)))
+
 (def ^:private ex-str-replacements
-  (delay (->> (io/resource "org/corfield/rephrase/config.edn")
-              (slurp)
-              (edn/read-string))))
+  (delay (merge-with merger (-> (io/resource "org/corfield/rephrase/config.edn")
+                                (slurp)
+                                (edn/read-string))
+                     (some-> (io/resource "org/corfield/rephrase-user.edn")
+                             (slurp)
+                             (edn/read-string)))))
 
 (defn- rephrase-ex-type
   "Return a more user-friendly name for certain exception classes."

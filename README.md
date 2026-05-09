@@ -48,6 +48,14 @@ You can also use `org.corfield.rephrase/repl-caught` directly when starting a RE
 (clojure.main/repl :caught rephrase/repl-caught)
 ```
 
+### Customization
+
+You can add more mappings by adding `org/corfield/rephrase-user.edn` to your 
+classpath with the same structure as `config.edn`.
+See [the source](https://github.com/seancorfield/rephrase/blob/main/resources/org/corfield/rephrase/config.edn)
+for details.
+_More detailed documentation on customization will be provided in the future._
+
 ## Inspiration
 
 There have been a lot of discussions and libraries started around this topic.

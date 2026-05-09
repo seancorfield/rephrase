@@ -1,6 +1,7 @@
 {:ex-types
  {clojure.lang.ArityException "incorrect number of arguments"
   java.lang.ClassCastException "unexpected type"
+  java.lang.IllegalArgumentException "invalid argument"
   java.lang.NullPointerException "'nil' encountered"}
 
  :inline-types
@@ -15,9 +16,15 @@
   ["clojure.lang.ISeq" "a sequence"]
   ;; and the short form used in some errors:
   ["ISeq" "a sequence"]
+  ["clojure.lang.Iterate" "a sequence (range)"]
   ["clojure.lang.Keyword" "a keyword"]
+  ["clojure.lang.LongRange" "a sequence (range)"]
   ["clojure.lang.Named" "a keyword or a symbol"]
   ["clojure.lang.PersistentArrayMap" "a map"]
+  ["clojure.lang.PersistentHashMap" "a map"]
+  ["clojure.lang.PersistentHashSet" "a set"]
+  ["clojure.lang.PersistentList\\$EmptyList" "an empty list"]
+  ["clojure.lang.Range" "a sequence (range)"]
   ["clojure.lang.Reversible" "a vector or a sorted-map"]
   ["clojure.lang.Sequential" "a sequential collection (such as a vector or a list)"]
   ["clojure.lang.Sorted" "a collection stored in a sorted manner (such as sorted-map or sorted-set)"]
@@ -51,6 +58,8 @@
  [["^Unable to resolve symbol: (.*) in this context$"
    "the name $1 is not defined"]
   ["^class (.*) cannot be cast to class (.*)$"
+   "Expected $2, but was given $1"]
+  ["^Cannot cast (.*) to (.*)$"
    "Expected $2, but was given $1"]
   ["^Don't know how to create (.*) from: (.*)$"
    "Expected $1, but was given $2"]
