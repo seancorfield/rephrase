@@ -1,1 +1,18 @@
-{}
+{:ex-types
+ {java.lang.ClassCastException UnexpectedType}
+
+ :inline-types
+ [["clojure.lang.Symbol" "a symbol"]
+  ["clojure.lang.Keyword" "a keyword"]
+  ["clojure.lang.IPersistentVector" "a vector"]
+  ["clojure.lang.IPersistentMap" "a map"]
+  ["java.lang.Number" "a number"]]
+
+ :removals
+ [" \\(.*is in unnamed module.*\\)$"
+  "clojure\\.lang\\."
+  "java\\.lang\\."]
+
+ :ex-messages
+ [["^class (.*) cannot be cast to class (.*)$"
+   "Expected $2, but was given $1"]]}
