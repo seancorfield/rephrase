@@ -27,7 +27,7 @@
 
 (defn- rephrase-message
   "Return a more user-friendly message for certain exception messages."
-  [msg]
+  [msg clazz]
   (let [inline-types (:inline-types @ex-str-replacements)
         ex-messages  (:ex-messages @ex-str-replacements)
         removals     (:removals @ex-str-replacements)]
@@ -39,8 +39,12 @@
           (reduce (fn [msg re]
                     (str/replace msg (re-pattern re) ""))
                   msg removals)
-          (reduce (fn [msg [pattern replacement]]
-                    (str/replace msg (re-pattern pattern) replacement))
+          (reduce (fn [msg [pattern replacement class-symbol]]
+                    (if (or (nil? class-symbol) ; not tied to a class
+                            (and class-symbol ; or the class matches
+                                 (= class-symbol (symbol clazz))))
+                      (str/replace msg (re-pattern pattern) replacement)
+                      replacement))
                   msg ex-messages)))))
 
 (defn- rephrase-ex-str
@@ -128,7 +132,8 @@
   "A wrapper around `clojure.main/ex-str` that produces a more user-friendly
    string representation of an exception map."
   [ex-map]
-  (-> ex-map
-      (update :clojure.error/class rephrase-ex-type)
-      (update :clojure.error/cause rephrase-message)
-      rephrase-ex-str))
+  (let [clazz (:clojure.error/class ex-map)]
+    (-> ex-map
+        (update :clojure.error/cause rephrase-message clazz)
+        (update :clojure.error/class rephrase-ex-type)
+        rephrase-ex-str)))

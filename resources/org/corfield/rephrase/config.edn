@@ -1,19 +1,72 @@
 {:ex-types
- {java.lang.ClassCastException UnexpectedType}
+ {java.lang.ClassCastException "unexpected type"
+  java.lang.NullPointerException "'nil' encountered"}
 
  :inline-types
- [["clojure.lang.Symbol" "a symbol"]
-  ["clojure.lang.Keyword" "a keyword"]
-  ["clojure.lang.IPersistentVector" "a vector"]
+ ;; lifted from https://github.com/Clojure-Intro-Course/babel/blob/master/src/errors/dictionaries.clj
+ [["clojure.lang.Associate" "a map or a vector"]
+  ["clojure.lang.BigInt" "a number"]
+  ["clojure.lang.BigDecimal" "a number"]
+  ["clojure.lang.Ratio" "a number"]
+  ["clojure.lang.IFn" "a function"]
   ["clojure.lang.IPersistentMap" "a map"]
+  ["clojure.lang.IPersistentVector" "a vector"]
+  ["clojure.lang.ISeq" "a sequence"]
+  ;; and the short form used in some errors:
+  ["ISeq" "a sequence"]
+  ["clojure.lang.Keyword" "a keyword"]
+  ["clojure.lang.Named" "a keyword or a symbol"]
+  ["clojure.lang.PersistentArrayMap" "a map"]
+  ["clojure.lang.Reversible" "a vector or a sorted-map"]
+  ["clojure.lang.Sequential" "a sequential collection (such as a vector or a list)"]
+  ["clojure.lang.Sorted" "a collection stored in a sorted manner (such as sorted-map or sorted-set)"]
+  ["clojure.lang.Symbol" "a symbol"]
+  ["java.io.BufferedReader" "a file or an input stream"]
+  ["java.lang.Boolean" "a boolean"]
+  ["java.lang.Character" "a character"]
+  ["java.lang.CharSequence" "a string"]
+  ["java.lang.Double" "a number"]
+  ["java.lang.Exception" "an exception"]
+  ["java.lang.Float" "a number"]
+  ["java.lang.Integer" "a number"]
+  ["java.lang.Long" "a number"]
   ["java.lang.Number" "a number"]
-  ["java.lang.String" "a string"]]
+  ["java.lang.Short" "a number"]
+  ["java.lang.String" "a string"]
+  ["java.lang.Throwable" "an exception (Throwable)"]
+  ["java.util.Collection" "a traversable collection (such as a vector, list, or set)"]
+  ["java.util.Date" "a date"]
+  ["java.util.regex.Pattern" "a regular expression pattern"]
+  ["java.util.regex.Matcher" "a regular expression matcher"]]
 
  :removals
  [" \\([^()]*is in unnamed module[^()]*\\)$"
+  "clojure\\.core/"
   "clojure\\.lang\\."
-  "java\\.lang\\."]
+  "java\\.lang\\."
+  "java\\.util\\."]
 
  :ex-messages
- [["^class (.*) cannot be cast to class (.*)$"
-   "Expected $2, but was given $1"]]}
+ [["^Unable to resolve symbol: (.*) in this context$"
+   "the name $1 is not defined"]
+  ["^class (.*) cannot be cast to class (.*)$"
+   "Expected $2, but was given $1"]
+  ["^Don't know how to create (.*) from: (.*)$"
+   "Expected $1, but was given $2"]
+  ["Cannot invoke \"a function\\.invoke\\(.*\\)\" because the return value of \"Var.getRawRoot\\(\\)\" is null"
+   "The function you are trying to call has the value 'nil'"]
+  ["Cannot invoke \"a function\\.invoke\\(.*\\)\" because \"(.*)\" is null"
+   "The function you are trying to call, $1, has the value 'nil'"]
+  ["Cannot invoke \".*toString\\(.*\\)\" because \"(.*)\" is null"
+   "Expected a string, but was given 'nil', possibly in $1 (which may be in code you are calling)"]
+  ["^Wrong number of args \\(0\\) passed to: (:.*)$"
+   "The keyword $1 was used as a function, with no arguments, but it expects one or two arguments"]
+  ["^Wrong number of args \\((.*)\\) passed to: (:.*)$"
+   "The keyword $2 was used as a function, with $1 arguments, but it expects one or two arguments"]
+  ["^Wrong number of args \\(0\\) passed to: (.*)$"
+   "$1 was called with no arguments, but it requires at least one argument"]
+  ["^Wrong number of args \\(1\\) passed to: (.*)$"
+   "$1 was called with one argument, but it expects a different number of arguments"]
+  ["^Wrong number of args \\((.*)\\) passed to: (.*)$"
+   "$2 was called with $1 arguments, but it expects a different number of arguments"]
+  ["^Divide by zero$" "Tried to divide by zero"]]}
