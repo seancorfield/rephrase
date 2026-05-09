@@ -6,7 +6,7 @@
 
 (set! *warn-on-reflection* true)
 
-(defn- rephrase-err->msg
+(defn rephrase-err->msg
   "Helper to return an error message string from an exception.
    Copied from `clojure.main`, updated to call our custom 'to string'."
   [^Throwable e]
