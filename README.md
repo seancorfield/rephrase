@@ -18,6 +18,17 @@ messages.
 
 ## Usage
 
+Add the following dependency to your project (or as a global dependency
+in your user-level `deps.edn` or `profiles.clj` file):
+
+```clojure
+org.corfield/rephrase {:mvn/version "0.1.0-SNAPSHOT"}
+```
+
+This snapshot version will be updated frequently as I get feedback from the
+community. Once it reaches a sufficiently stable state, I will release a 1.0.0 
+version.
+
 ### nREPL Middleware
 
 This is probably the most common way to use this library.
@@ -36,6 +47,19 @@ You can also use `org.corfield.rephrase/repl-caught` directly when starting a RE
 
 (clojure.main/repl :caught rephrase/repl-caught)
 ```
+
+## Inspiration
+
+There have been a lot of discussions and libraries started around this topic.
+I've toyed with the idea of rephrasing exceptions for several years, and have
+started to write a library like this more than once.
+
+[Adrian Smith](https://github.com/phronmophobic/) provided a long list of
+links on [Slack](https://clojurians.slack.com/archives/C03S1KBA2/p1756162447266729)
+that has been great background reading for this project.
+
+Much of the initial mapping of class names and rephrasing of exception messages
+comes from [Babel](https://github.com/Clojure-Intro-Course/babel).
 
 ## License
 
