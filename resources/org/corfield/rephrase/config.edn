@@ -92,4 +92,6 @@
    "$1 was called with one argument, but it expects a different number of arguments"]
   ["^Wrong number of args \\((.*)\\) passed to: (.*)$"
    "$2 was called with $1 arguments, but it expects a different number of arguments"]
-  ["^Divide by zero$" "Tried to divide by zero"]]}
+  ["^Divide by zero$" "Tried to divide by zero"]
+  ["^No matching method (.*) found taking (.*) args for class (.*)$"
+   "No matching method $1 found, taking $2 arguments, for $3"]]}
