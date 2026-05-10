@@ -81,7 +81,9 @@
   ["^Cannot invoke \"a function\\.invoke\\(.*\\)\" because \"(.*)\" is null"
    "The function you are trying to call, $1, has the value 'nil'"]
   ["^Cannot invoke \".*toString\\(.*\\)\" because \"(.*)\" is null"
-   "Expected a string, but was given 'nil', possibly in $1 (which may be in code you are calling)"]
+   "Tried to convert a value to a string, but was given 'nil', possibly in $1 (which may be in code you are calling)"]
+  ["^Cannot invoke \"(.*)\\.(.*)\\(.*\\)\" because \"(.*)\" is null"
+   "Tried to call .$2() on $1, but was given 'nil', possibly in $3 (which may be in code you are calling)"]
   ["^For input string: (.*)$"
    "The string $1 cannot be converted to a number" java.lang.NumberFormatException]
   ["^Wrong number of args \\(0\\) passed to: (:.*)$"
