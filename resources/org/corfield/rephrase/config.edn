@@ -21,6 +21,7 @@
   ["clojure.lang.Iterate" "a sequence (range)"]
   ["clojure.lang.Keyword" "a keyword"]
   ["clojure.lang.LongRange" "a sequence (range)"]
+  ["clojure.lang.MapEntry" "a map entry or key-value pair"]
   ["clojure.lang.Named" "a keyword or a symbol"]
   ["clojure.lang.PersistentArrayMap" "a map"]
   ["clojure.lang.PersistentHashMap" "a map"]
@@ -47,6 +48,7 @@
   ["java.lang.Throwable" "an exception (Throwable)"]
   ["java.util.Collection" "a traversable collection (such as a vector, list, or set)"]
   ["java.util.Date" "a date"]
+  ["java.util.Map\\$Entry" "a map entry or key-value pair"]
   ["java.util.regex.Pattern" "a regular expression pattern"]
   ["java.util.regex.Matcher" "a regular expression matcher"]]
 
@@ -95,9 +97,9 @@
   ["^Divide by zero$" "Tried to divide by zero"]
   ["^No matching method (.*) found taking (.*) args for class (.*)$"
    "No matching method $1, taking $2 arguments, found on $3"]
-  ["^Could not locate .*__init.class, ([^/]+)/([^/]+).clj or .*.cljc on classpath.$"
+  ["^Could not locate .*__init.class, ([^/]+)/([^/]+).clj or .*.cljc on classpath.( Please.*)?$"
    "$1.$2 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]
-  ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.$"
+  ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.( Please.*)?$"
    "$1.$2.$3 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]
-  ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.$"
+  ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.( Please.*)?$"
    "$1.$2.$3.$4 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]]}
