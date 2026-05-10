@@ -94,4 +94,10 @@
    "$2 was called with $1 arguments, but it expects a different number of arguments"]
   ["^Divide by zero$" "Tried to divide by zero"]
   ["^No matching method (.*) found taking (.*) args for class (.*)$"
-   "No matching method $1 found, taking $2 arguments, for $3"]]}
+   "No matching method $1, taking $2 arguments, found on $3"]
+  ["^Could not locate .*__init.class, ([^/]+)/([^/]+).clj or .*.cljc on classpath.$"
+   "$1.$2 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]
+  ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.$"
+   "$1.$2.$3 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]
+  ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.$"
+   "$1.$2.$3.$4 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]]}
