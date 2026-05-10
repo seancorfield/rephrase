@@ -2,6 +2,7 @@
  {clojure.lang.ArityException "incorrect number of arguments"
   java.lang.ClassCastException "unexpected type"
   java.lang.IllegalArgumentException "invalid argument"
+  java.lang.NumberFormatException "invalid number"
   java.lang.NullPointerException "'nil' encountered"}
 
  :inline-types
@@ -13,6 +14,7 @@
   ["clojure.lang.IFn" "a function"]
   ["clojure.lang.IPersistentMap" "a map"]
   ["clojure.lang.IPersistentVector" "a vector"]
+  ["clojure.lang.IObj" "an object that can have metadata"]
   ["clojure.lang.ISeq" "a sequence"]
   ;; and the short form used in some errors:
   ["ISeq" "a sequence"]
@@ -67,12 +69,14 @@
    "Expected $2, but was given $1"]
   ["^Don't know how to create (.*) from: (.*)$"
    "Expected $1, but was given $2"]
-  ["Cannot invoke \"a function\\.invoke\\(.*\\)\" because the return value of \"Var.getRawRoot\\(\\)\" is null"
+  ["^Cannot invoke \"a function\\.invoke\\(.*\\)\" because the return value of \"Var.getRawRoot\\(\\)\" is null"
    "The function you are trying to call has the value 'nil'"]
-  ["Cannot invoke \"a function\\.invoke\\(.*\\)\" because \"(.*)\" is null"
+  ["^Cannot invoke \"a function\\.invoke\\(.*\\)\" because \"(.*)\" is null"
    "The function you are trying to call, $1, has the value 'nil'"]
-  ["Cannot invoke \".*toString\\(.*\\)\" because \"(.*)\" is null"
+  ["^Cannot invoke \".*toString\\(.*\\)\" because \"(.*)\" is null"
    "Expected a string, but was given 'nil', possibly in $1 (which may be in code you are calling)"]
+  ["^For input string: (.*)$"
+   "The string $1 cannot be converted to a number" java.lang.NumberFormatException]
   ["^Wrong number of args \\(0\\) passed to: (:.*)$"
    "The keyword $1 was used as a function, with no arguments, but it expects one or two arguments"]
   ["^Wrong number of args \\((.*)\\) passed to: (:.*)$"

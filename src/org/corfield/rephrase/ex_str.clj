@@ -46,7 +46,7 @@
                             (and class-symbol ; or the class matches
                                  (= class-symbol (symbol clazz))))
                       (str/replace msg (re-pattern pattern) replacement)
-                      replacement))
+                      msg))
                   msg ex-messages)))))
 
 (defn- rephrase-ex-str
