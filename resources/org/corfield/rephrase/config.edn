@@ -53,7 +53,7 @@
   ["java.util.regex.Matcher" "a regular expression matcher"]]
 
  :removals
- [" \\([^()]*(is|are) in unnamed module[^()]*\\)$"
+ [" \\([^()]*(is|are) in (unnamed )?module[^()]*\\)$"
   "clojure\\.core/"
   "clojure\\.lang\\."
   "java\\.lang\\."
