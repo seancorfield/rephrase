@@ -57,7 +57,8 @@
   "clojure\\.core/"
   "clojure\\.lang\\."
   "java\\.lang\\."
-  "java\\.util\\."]
+  "java\\.util\\."
+  "--\\d+"]
 
  :ex-messages
  [["^Unable to resolve symbol: (catch|def|do|if|quote|recur|throw|try|var) in this context$"

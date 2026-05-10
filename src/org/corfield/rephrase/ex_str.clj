@@ -49,6 +49,12 @@
                       msg))
                   msg ex-messages)))))
 
+(defn- clean-sym
+  "Given a raw symbol, clean it up for display.
+   Currently does nothing."
+  [symbol]
+  symbol)
+
 (defn- rephrase-ex-str
   "Based on clojure.main/ex-str, but with a more user-friendly format.
    Returns a string from exception data, as produced by ex-triage.
@@ -64,7 +70,8 @@
         cause-type (if (contains? #{"Exception" "RuntimeException"} simple-class)
                      "" ;; omit, not useful
                      (str " (" simple-class ")"))
-        cause (when cause (str/replace cause #"\n$" ""))]
+        cause (when cause (str/replace cause #"\n$" ""))
+        symbol (when symbol (clean-sym symbol))]
     (case phase
       :read-source
       (format "Syntax error: %s, at (%s).%n" cause loc)
