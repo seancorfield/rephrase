@@ -7,7 +7,7 @@
 
  :inline-types
  ;; lifted from https://github.com/Clojure-Intro-Course/babel/blob/master/src/errors/dictionaries.clj
- [["clojure.lang.Associate" "a map or a vector"]
+ [["clojure.lang.Associative" "a map or a vector"]
   ["clojure.lang.BigInt" "a number"]
   ["clojure.lang.BigDecimal" "a number"]
   ["clojure.lang.Ratio" "a number"]
