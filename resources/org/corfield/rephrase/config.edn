@@ -26,6 +26,7 @@
   ["clojure.lang.PersistentHashMap" "a map"]
   ["clojure.lang.PersistentHashSet" "a set"]
   ["clojure.lang.PersistentList\\$EmptyList" "an empty list"]
+  ["clojure.lang.PersistentVector" "a vector"]
   ["clojure.lang.Range" "a sequence (range)"]
   ["clojure.lang.Reversible" "a vector or a sorted-map"]
   ["clojure.lang.Sequential" "a sequential collection (such as a vector or a list)"]
@@ -50,7 +51,7 @@
   ["java.util.regex.Matcher" "a regular expression matcher"]]
 
  :removals
- [" \\([^()]*is in unnamed module[^()]*\\)$"
+ [" \\([^()]*(is|are) in unnamed module[^()]*\\)$"
   "clojure\\.core/"
   "clojure\\.lang\\."
   "java\\.lang\\."
