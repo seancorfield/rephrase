@@ -62,6 +62,10 @@
    "$1 is a special form, and cannot be used by itself or passed as an argument to a function"]
   ["^Unable to resolve symbol: (.*) in this context$"
    "the name $1 is not defined"]
+  ["^No such namespace: ([A-Z].*)$"
+   "The class $1 (or namespace) is unknown, possibly due to a missing import (or require)"]
+  ["^No such namespace: ([a-z].*)$"
+   "The namespace $1 is unknown, possibly due to a missing require"]
   ["^Can't take value of a macro: #'(.*)$"
    "$1 is a macro, and cannot be used by itself or passed as an argument to a function"]
   ["^class (.*) cannot be cast to class (.*)$"
