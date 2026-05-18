@@ -3,7 +3,7 @@ name: Develop & Snapshot
 on:
   push:
     branches:
-      - "develop"
+      - "main"
 
 jobs:
   build-and-snapshot:
