@@ -11,7 +11,7 @@
 
 (defn- pom-template [version]
   [[:description "Rephrase exceptions."]
-   [:url "https://github.com/corfield/rephrase"]
+   [:url "https://github.com/seancorfield/rephrase"]
    [:licenses
     [:license
      [:name "Eclipse Public License 2.0"]
@@ -20,9 +20,9 @@
     [:developer
      [:name "Sean Corfield"]]]
    [:scm
-    [:url "https://github.com/corfield/rephrase"]
-    [:connection "scm:git:https://github.com/corfield/rephrase.git"]
-    [:developerConnection "scm:git:ssh:git@github.com:corfield/rephrase.git"]
+    [:url "https://github.com/seancorfield/rephrase"]
+    [:connection "scm:git:https://github.com/seancorfield/rephrase.git"]
+    [:developerConnection "scm:git:ssh:git@github.com:seancorfield/rephrase.git"]
     [:tag (str "v" version)]]])
 
 (defn- jar-opts [opts]
