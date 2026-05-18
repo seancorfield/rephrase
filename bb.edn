@@ -18,7 +18,12 @@
                         (str ":" v)
                         ":dev:test:runner"))))}
 
-  test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
+  test:bb {:extra-paths ["dev" "test"]
+           :extra-deps  {io.github.noahtheduke/lazytest {:mvn/version "2.0.0"}}
+           :requires [[lazytest.main]]
+           :task (lazytest.main/-main "-n" "org.corfield.rephrase-test")}
+
+  test:all {:doc "Run all tests for different Clojure versions"
             :task (binding [*command-line-args* (conj *command-line-args* "all")]
                     (run 'test))}
 
