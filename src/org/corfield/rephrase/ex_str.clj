@@ -60,8 +60,7 @@
    Returns a string from exception data, as produced by ex-triage.
    Unlike clojure.main/ex-str, this function produces a single-line string 
    that explains the cause first, then provides the location and type."
-  [{:clojure.error/keys [phase source path line column symbol class cause spec]
-    :as triage-data}]
+  [{:clojure.error/keys [phase source path line column symbol class cause spec]}]
   (let [loc (str (or path source "REPL") ":" (or line 1) (if column (str ":" column) ""))
         class-name (name (or class ""))
         simple-class (when class
