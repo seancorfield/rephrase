@@ -18,12 +18,6 @@
                         (str ":" v)
                         ":dev:test:runner"))))}
 
-  ;; not sure if we can get this to work with bb?
-  test:bb {:extra-paths ["dev" "test"]
-           :extra-deps  {io.github.noahtheduke/lazytest {:mvn/version "2.0.0"}
-                         nrepl/nrepl {:mvn/version "1.7.0"}}
-           :task lazytest.main/-main}
-
   test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
             :task (binding [*command-line-args* (conj *command-line-args* "all")]
                     (run 'test))}
@@ -35,7 +29,7 @@
                         (map str))}
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
-      :depends [#_test:bb test:all]
+      :depends [test:all]
       :task (apply shell "clojure -T:build jar" (run '-snapshot))}
 
   ci:deploy {:doc "Deploy the JAR we just built to Clojars."
