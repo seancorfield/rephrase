@@ -1,12 +1,13 @@
 ;; Copyright © 2026 Sean Corfield, all rights reserved
 
 (ns org.corfield.rephrase.nrepl-test
-  #?@(:bb [;; this is purely so ::caught/caught resolves at read time:
-           (:require [org.corfield.rephrase :as caught])]
-      :clj [(:require [lazytest.core :refer [defdescribe expect it]]
-                      [nrepl.middleware.caught :as caught]
-                      [org.corfield.rephrase :as rephrase]
-                      [org.corfield.rephrase.nrepl :as sut])])) ; system under test
+  #?(:bb ;; this is purely so ::caught/caught resolves at read time:
+     (:require [org.corfield.rephrase :as caught])
+     :clj
+     (:require [lazytest.core :refer [defdescribe expect it]]
+               [nrepl.middleware.caught :as caught]
+               [org.corfield.rephrase :as rephrase]
+               [org.corfield.rephrase.nrepl :as sut]))) ; system under test
 
 #?(:bb nil
    :clj
