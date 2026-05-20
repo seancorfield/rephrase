@@ -5,21 +5,34 @@
    strings. Not intended for public use."
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
-            [clojure.spec.alpha :as spec]
-            [clojure.string :as str]))
+            [clojure.spec.alpha :as s]
+            [clojure.string :as str]
+            [org.corfield.rephrase.specs :as specs]))
 
 (set! *warn-on-reflection* true)
 
 (defn- merger [a b]
   (if (map? a) (merge a b) (into a b)))
 
+(defn- read-rephrasings
+  "Given a resource path, read the rephrasing rules from it and return as a map.
+   An exception will be thrown if the content is invalid."
+  [path]
+  (let [data (some-> path
+                     (io/resource)
+                     (slurp)
+                     (edn/read-string))]
+    (when data
+      (if (s/valid? ::specs/config data)
+        data
+        (throw (ex-info (str "Invalid rephrase config in " path ": "
+                             (s/explain-str ::specs/config data))
+                        {:path path :data data}))))))
+
 (def ^:private ex-str-replacements
-  (delay (merge-with merger (-> (io/resource "org/corfield/rephrase/config.edn")
-                                (slurp)
-                                (edn/read-string))
-                     (some-> (io/resource "org/corfield/rephrase-user.edn")
-                             (slurp)
-                             (edn/read-string)))))
+  (delay (merge-with merger
+                     (read-rephrasings "org/corfield/rephrase/config.edn")
+                     (read-rephrasings "org/corfield/rephrase-user.edn"))))
 
 (defn- rephrase-ex-type
   "Return a more user-friendly name for certain exception classes."
@@ -79,8 +92,8 @@
       (format "Syntax error: %s, macroexpanding %sat (%s).%n"
               (if spec
                 (-> (with-out-str
-                      (spec/explain-out
-                       (if (= spec/*explain-out* spec/explain-printer)
+                      (s/explain-out
+                       (if (= s/*explain-out* s/explain-printer)
                          (update spec :clojure.spec.alpha/problems
                                  (fn [probs] (map #(dissoc % :in) probs)))
                          spec)))
@@ -123,8 +136,8 @@
         (format "Invalid arguments to %s: %s, at (%s).%n"
                 symbol
                 (-> (with-out-str
-                      (spec/explain-out
-                       (if (= spec/*explain-out* spec/explain-printer)
+                      (s/explain-out
+                       (if (= s/*explain-out* s/explain-printer)
                          (update spec :clojure.spec.alpha/problems
                                  (fn [probs] (map #(dissoc % :in) probs)))
                          spec)))

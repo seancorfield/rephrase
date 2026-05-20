@@ -4,9 +4,9 @@
             [deps-deploy.deps-deploy :as dd]))
 
 (def lib 'org.corfield/rephrase)
-(defn- the-version [patch] (format "0.1.%s" patch))
+(defn- the-version [patch] (format "1.0.%s" patch))
 (def version (the-version "0"))
-(def snapshot (the-version "0-SNAPSHOT"))
+(def snapshot (the-version "1-SNAPSHOT"))
 (def class-dir "target/classes")
 
 (defn- pom-template [version]
