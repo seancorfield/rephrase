@@ -70,7 +70,7 @@ Configuration is available under four keys in the EDN file:
 * `:removals` - a vector of regex strings; any occurrence of these strings in the exception message will be removed.
 * `:ex-messages` - a vector of pairs (but see below): each pair is a regex string and a replacement string; this is used to rephrase specific messages to more beginner-friendly versions.
 
-The `:ex-types` mapping is applied independently to the exception type.
+The `:ex-types` mapping is applied to the exception type, independently.
 
 The exception message is rephrased by mapping the `:inline-types` first, 
 then applying the `:removals`, and finally applying the `:ex-messages` 
