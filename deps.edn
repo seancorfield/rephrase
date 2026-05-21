@@ -2,9 +2,11 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}}
 
  :aliases
- {:dev
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.7.0"}}
-   :extra-paths ["dev"]}
+ {:provided ; optional => provided in build.clj (hack!)
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.7.0" :optional true}}}
+
+  :dev
+  {:extra-paths ["dev"]}
 
   ;; versions to test against:
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
