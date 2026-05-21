@@ -2,7 +2,7 @@
  :deps {org.clojure/clojure {:mvn/version "1.10.3"}}
 
  :aliases
- {:provided ; optional => provided in build.clj (hack!)
+ {:optional
   {:extra-deps {nrepl/nrepl {:mvn/version "1.7.0" :optional true}}}
 
   :dev

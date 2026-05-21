@@ -16,7 +16,7 @@
             (println "\nTesting Clojure" v)
             (shell (str "clojure -M"
                         (str ":" v)
-                        ":dev:provided:test:runner"))))}
+                        ":dev:optional:test:runner"))))}
 
   test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
             :task (binding [*command-line-args* (conj *command-line-args* "all")]

@@ -1,13 +1,12 @@
 (ns build
   (:refer-clojure :exclude [test])
-  (:require [clojure.string :as str]
-            [clojure.tools.build.api :as b]
+  (:require [clojure.tools.build.api :as b]
             [deps-deploy.deps-deploy :as dd]))
 
 (def lib 'org.corfield/rephrase)
 (defn- the-version [patch] (format "1.0.%s" patch))
-(def version (the-version "1"))
-(def snapshot (the-version "2-SNAPSHOT"))
+(def version (the-version "2"))
+(def snapshot (the-version "3-SNAPSHOT"))
 (def class-dir "target/classes")
 
 (defn- pom-template [version]
@@ -32,7 +31,7 @@
     (assoc opts
            :lib lib   :version version
            :jar-file  (format "target/%s-%s.jar" lib version)
-           :basis     (b/create-basis {:aliases [:provided]})
+           :basis     (b/create-basis {:aliases [:optional]})
            :class-dir class-dir
            :target    "target"
            :src-dirs  ["src"]
@@ -43,12 +42,6 @@
     (b/delete {:path "target"})
     (println "\nWriting pom.xml...")
     (b/write-pom opts)
-    ;; patch the pom:
-    (let [pom-file (b/pom-path (select-keys opts [:lib :class-dir]))]
-      (-> pom-file
-          (slurp)
-          (str/replace "<optional>true</optional>" "<scope>provided</scope>")
-          (->> (spit pom-file))))
     (println "\nCopying source...")
     (b/copy-dir {:src-dirs ["resources" "src"] :target-dir class-dir})
     (println "\nBuilding" (:jar-file opts) "...")
