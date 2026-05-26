@@ -79,6 +79,8 @@
    "Expected $1, but was given $2"]
   ["^Cannot invoke \"a function\\.invoke\\(.*\\)\" because the return value of \"Var.getRawRoot\\(\\)\" is null"
    "The function you are trying to call has the value 'nil'"]
+  ["^Cannot invoke \"a function\\.invoke\\(.*\\)\" because the return value of \"a function\\.invoke\\(.*\\)\" is null"
+   "The function you called returned 'nil' instead of a function that could be called"]
   ["^Cannot invoke \"a function\\.invoke\\(.*\\)\" because \"(.*)\" is null"
    "The function you are trying to call, $1, has the value 'nil'"]
   ["^Cannot invoke \".*toString\\(.*\\)\" because \"(.*)\" is null"
