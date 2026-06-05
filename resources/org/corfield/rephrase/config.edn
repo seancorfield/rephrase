@@ -11,6 +11,7 @@
   ["clojure.lang.BigInt" "a number"]
   ["clojure.lang.BigDecimal" "a number"]
   ["clojure.lang.Ratio" "a number"]
+  ["clojure.lang.IFn\\$[DLO]+" "a function taking or returning a primitive type"]
   ["clojure.lang.IFn" "a function"]
   ["clojure.lang.IPersistentMap" "a map"]
   ["clojure.lang.IPersistentVector" "a vector"]
@@ -71,8 +72,10 @@
    "The namespace $1 is unknown, possibly due to a missing require"]
   ["^Can't take value of a macro: #'(.*)$"
    "$1 is a macro, and cannot be used by itself or passed as an argument to a function"]
+  ["^class (.*) cannot be cast to class (a function taking or returning a primitive type.*)$"
+   "Expected $2, but was given $1 -- was it redefined without the type hints?"]
   ["^class (.*) cannot be cast to class (.*)$"
-   "Expected $2, but was given $1"]
+ "Expected $2, but was given $1"]
   ["^Cannot cast (.*) to (.*)$"
    "Expected $2, but was given $1"]
   ["^Don't know how to create (.*) from: (.*)$"
