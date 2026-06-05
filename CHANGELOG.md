@@ -1,5 +1,8 @@
 # Change Log
 
+1.0.3 -- 2026-06-05
+* Some rephrasing improvements around function calls.
+
 1.0.2 -- 2026-05-21
 * Switch `nrepl/nrepl` to `optional` as a test for cljdoc.org.
 
