@@ -1,5 +1,8 @@
 # Change Log
 
+1.0.next in progress
+* Update dev/test deps.
+
 1.0.3 -- 2026-06-05
 * Some rephrasing improvements around function calls.
 
