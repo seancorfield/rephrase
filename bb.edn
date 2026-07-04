@@ -7,7 +7,7 @@
                      versions (or (seq (filter (fn [v] (str/starts-with? v "1."))
                                                *command-line-args*))
                                   ["1.10"])]
-                 (if all? ["1.10" "1.11" "1.12"] versions))}
+                 (if all? ["1.10" "1.11" "1.12" "1.13"] versions))}
 
   test {:doc "Run the test suite."
         :task
