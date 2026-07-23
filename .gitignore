@@ -29,3 +29,4 @@
 /target
 .calva/mcp-server/port
 .clj-kondo/imports/
+notes.txt
