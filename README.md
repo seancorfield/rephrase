@@ -4,6 +4,10 @@
 
 Rephrase exceptions.
 
+> [My AI Usage Statement](https://corfield.org/blog/2026/08/02/ai/)
+
+## Overview
+
 Error messages in Clojure have been a long-standing source of frustration
 for beginners. This library is an experiment in rephrasing exceptions to
 make them more beginner-friendly.
