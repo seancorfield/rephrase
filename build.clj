@@ -6,7 +6,7 @@
 (def lib 'org.corfield/rephrase)
 (defn- the-version [patch] (format "1.0.%s" patch))
 (def version (the-version "4"))
-(def snapshot (the-version "2-SNAPSHOT"))
+(def snapshot (the-version "5-SNAPSHOT"))
 (def class-dir "target/classes")
 
 (defn- pom-template [version]
