@@ -1,6 +1,7 @@
 # Change Log
 
-1.0.next in progress
+1.0.4 -- 2026-08-05
+* Fix handling of messages where `:clojure.error/class` is missing (or `nil`).
 * Update dev/test deps.
 
 1.0.3 -- 2026-06-05

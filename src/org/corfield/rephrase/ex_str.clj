@@ -37,8 +37,9 @@
 (defn- rephrase-ex-type
   "Return a more user-friendly name for certain exception classes."
   [clazz]
-  (let [type-map (:ex-types @ex-str-replacements)]
-    (get type-map (symbol clazz) clazz)))
+  (when clazz
+    (let [type-map (:ex-types @ex-str-replacements)]
+      (get type-map (symbol clazz) clazz))))
 
 (defn- rephrase-message
   "Return a more user-friendly message for certain exception messages."
@@ -56,8 +57,8 @@
                   msg removals)
           (reduce (fn [msg [pattern replacement class-symbol]]
                     (if (or (nil? class-symbol) ; not tied to a class
-                            (and class-symbol ; or the class matches
-                                 (= class-symbol (symbol clazz))))
+                            ;; or the class matches the exception:
+                            (= class-symbol (and clazz (symbol clazz))))
                       (str/replace msg (re-pattern pattern) replacement)
                       msg))
                   msg ex-messages)))))
