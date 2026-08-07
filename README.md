@@ -12,18 +12,32 @@ Error messages in Clojure have been a long-standing source of frustration
 for beginners. This library is an experiment in rephrasing exceptions to
 make them more beginner-friendly.
 
-The library provides two main functions:
-* `org.corfield.rephrase/repl-caught` - a replacement for `clojure.main/repl-caught` that rephrases exceptions before printing them (via the `:caught` option when starting a REPL),
-* `org.corfield.rephrase.nrepl/wrap-rephrase` - nREPL middleware that applies `repl-caught` to produce rephrased exceptions in nREPL sessions.
-
-There is also a helper function that applications or tools might use:
-* `org.corfield.rephrase/rephrase-err->msg` - a replacement for `clojure.main/err->msg` that takes an exception and returns a rephrased error message string.
-
-Error messages are rephrased to a single line, with the cause first, followed
+`rephrase` simplifies error messages to a single line, with the cause first, followed
 by the location of the error. This makes inline display of error messages in
 editors easier to read, especially if the editor normally suppresses the
 second line of the standard exception report (e.g., Calva), or truncates long 
 messages.
+
+Some example message `rephrase`ings:
+
+`(inc "foo")`
+- `rephrase`: Expected a number, but was given a string
+- `original`: Execution error (ClassCastException)... class java.lang.String cannot be cast to class java.lang.Number...
+
+`(str let)`
+- `rephrase`: Syntax error: let is a macro, and cannot be used by itself or passed as an argument to a function
+- `original`: Syntax error compiling... Can't take value of a macro
+
+`bar`
+- `rephrase`: Syntax error: the name bar is not defined
+- `original`: Syntax error compiling... Unable to resolve symbol: bar
+
+`foo/bar`
+- `rephrase`: Syntax error: The namespace foo is unknown, possibly due to a missing require
+- `original`: Syntax error compiling... No such namespace: foo
+
+See `:ex-messages` in [config.edn](/resources/org/corfield/rephrase/config.edn) to get an idea of current rephrasings.
+
 
 ## Usage
 
@@ -32,25 +46,40 @@ messages.
 [![Slack](https://img.shields.io/badge/slack-rephrase-orange.svg?logo=slack)](https://clojurians.slack.com/app_redirect?channel=rephrase)
 [![Join Slack](https://img.shields.io/badge/slack-join_clojurians-orange.svg?logo=slack)](http://clojurians.net)
 
-Add the following dependency to your project (or as a global dependency
-in your user-level `deps.edn` or `profiles.clj` file):
+### `rephrase` as REPL Middleware
+
+`rephrase` is injected into your Clojure REPL.
+We'll walk you through a typical setup.
+
+For the purposes of this tutorial, we'll assume you:
+- are using Calva (if you are learning Clojure, [Calva](https://calva.io/) is beginner friendly, and has [excellent tutorials](https://calva.io/getting-started/).)
+- prefer to start and connect to your REPL from Calva
+- are using a `deps.edn` project
+
+Create (or edit) a `deps.edn` with an alias for `rephrase`:
 
 ```clojure
-org.corfield/rephrase {:mvn/version "1.0.4"}
+{:aliases {:rephrase-nrepl-middleware 
+           {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.4"}}
+            :main-opts  ["-m" "nrepl.cmdline"
+                         "--middleware" "[org.corfield.rephrase.nrepl/wrap-rephrase,cider.nrepl/cider-middleware]"]}}}
 ```
 
-### nREPL Middleware
+> [!TIP]
+> As a beginner, you don't need to understand the details, but this injects `rephrase` as nREPL middleware.
 
-This is probably the most common way to use this library.
+From Calva:
+1. You'll `Start a Project REPL and Connect`. 
+You can invoke this via the `View`->`Command Palette...` menu or via the `ctrl+alt+c ctrl+alt+j` keyboard shortcut.
+2. Choose `deps.edn` for your project type.
+3. Tick checkbox for `:rephrase-nrepl-middleware` alias.
+4. And then press the `OK` button.
 
-For use with nREPL, add `org.corfield.rephrase.nrepl/wrap-rephrase` to your
-list of middleware. See
-[nREPL Middleware Setup](https://docs.cider.mx/cider/basics/middleware_setup.html)
-in the CIDER documentation for details on how to do this.
+Now when your code generates errors you'll get `rephrase`d error messages!
 
-### Starting a REPL with `:caught`
+### `rephrase` when Starting a REPL from code
 
-You can also use `org.corfield.rephrase/repl-caught` directly when starting a REPL, by passing it as the value of the `:caught` option. For example:
+Beginners don't typically start a REPL from source code, but if you do such things, you can inject `rephrase` via the `:caught` handler:
 
 ```clojure
 (require '[org.corfield.rephrase :as rephrase])
@@ -58,11 +87,18 @@ You can also use `org.corfield.rephrase/repl-caught` directly when starting a RE
 (clojure.main/repl :caught rephrase/repl-caught)
 ```
 
+> [!TIP] 
+> In this case, you'd include `rephrase` in your `deps.edn` as a simple aliased dep, i.e.:
+> ```clojure
+> {:aliases {:rephrase 
+>            {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.4"}}}}}
+> ```
+
 ### Customization
 
 You can add more mappings by adding `org/corfield/rephrase-user.edn` to your 
 classpath with the same structure as `config.edn`.
-See [the source](https://github.com/seancorfield/rephrase/blob/main/resources/org/corfield/rephrase/config.edn)
+See [the source](/resources/org/corfield/rephrase/config.edn)
 for details.
 
 Configuration is available under four keys in the EDN file:
@@ -85,6 +121,15 @@ indicates the mapping should only be applied to messages of a specific exception
 type. If the symbol is present, the mapping will only be applied if the 
 original exception type matches the symbol (i.e., before rephrasing via `:ex-types`).
 This allows for more specific rephrasings that only apply to certain exception types, while still allowing more general rephrasings to apply to all messages.
+
+## Mechanics
+
+The `rephrase` library provides two main functions:
+* `org.corfield.rephrase/repl-caught` - a replacement for `clojure.main/repl-caught` that rephrases exceptions before printing them (via the `:caught` option when starting a REPL),
+* `org.corfield.rephrase.nrepl/wrap-rephrase` - nREPL middleware that applies `repl-caught` to produce rephrased exceptions in nREPL sessions.
+
+There is also a helper function that applications or tools might use:
+* `org.corfield.rephrase/rephrase-err->msg` - a replacement for `clojure.main/err->msg` that takes an exception and returns a rephrased error message string.
 
 ## Inspiration
 
