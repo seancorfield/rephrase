@@ -1,5 +1,8 @@
 # Change Log
 
+1.0.5 in progress
+* Expand README to help beginners get started with `rephrase` in their IDE/REPL via [#3](https://github.com/seancorfield/rephrase/pull/3) from [@lread](https://github.com/lread).
+
 1.0.4 -- 2026-08-05
 * Fix handling of messages where `:clojure.error/class` is missing (or `nil`).
 * Update dev/test deps.
