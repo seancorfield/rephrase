@@ -11,12 +11,15 @@
   ;; versions to test against:
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.4"}}}
-  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.5"}}}
+  :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.6"}}}
   :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha6"}}}
+
+  :jolt
+  {:extra-deps {org.clojure/spec.alpha {:mvn/version "0.6.249"}}}
 
   :test
   {:extra-paths ["test"]
-   :extra-deps {io.github.noahtheduke/lazytest {:mvn/version "2.0.0"}}}
+   :extra-deps {io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}}
 
   :runner
   {:main-opts   ["-m" "lazytest.main"]}

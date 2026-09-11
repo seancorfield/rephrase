@@ -1,13 +1,16 @@
+.calva/mcp-server/port
 .calva/output-window/
 .calva/repl.calva-repl
 .classpath
 .clj-kondo/.cache
+.clj-kondo/imports/
 .cpcache
 .eastwood
 .factorypath
 .hg/
 .hgignore
 .java-version
+.jolt/cpcache
 .lein-*
 .lsp/.cache
 .lsp/sqlite.db
@@ -27,7 +30,5 @@
 /checkouts
 /classes
 /target
-.calva/mcp-server/port
-.clj-kondo/imports/
 notes.txt
 outdated.txt
