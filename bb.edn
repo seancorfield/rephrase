@@ -1,4 +1,4 @@
-{:paths ["src"]
+{:paths ["src" "resources"]
  :tasks
  {:requires [[clojure.string :as str]]
 
@@ -17,6 +17,10 @@
             (shell (str "clojure -M"
                         (str ":" v)
                         ":dev:optional:test:runner"))))}
+
+  test:bb {:extra-paths ["test"]
+           :extra-deps  {io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}
+           :task lazytest.main/-main}
 
   test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
             :task (binding [*command-line-args* (conj *command-line-args* "all")]

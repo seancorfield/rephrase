@@ -72,10 +72,10 @@
    "The namespace $1 is unknown, possibly due to a missing require"]
   ["^Can't take value of a macro: #'(.*)$"
    "$1 is a macro, and cannot be used by itself or passed as an argument to a function"]
-  ["^class (.*) cannot be cast to class (a function taking or returning a primitive type.*)$"
-   "Expected $2, but was given $1 -- was it redefined without the type hints?"]
-  ["^class (.*) cannot be cast to class (.*)$"
- "Expected $2, but was given $1"]
+  ["^(class )?(.*) cannot be cast to (class )?(a function taking or returning a primitive type.*)$"
+   "Expected $4, but was given $2 -- was it redefined without the type hints?"]
+  ["^(class )?(.*) cannot be cast to (class )?(.*)$"
+   "Expected $4, but was given $2"]
   ["^Cannot cast (.*) to (.*)$"
    "Expected $2, but was given $1"]
   ["^Don't know how to create (.*) from: (.*)$"
@@ -103,8 +103,8 @@
   ["^Wrong number of args \\((.*)\\) passed to: (.*)$"
    "$2 was called with $1 arguments, but it expects a different number of arguments"]
   ["^Divide by zero$" "Tried to divide by zero"]
-  ["^No matching method (.*) found taking (.*) args for class (.*)$"
-   "No matching method $1, taking $2 arguments, found on $3"]
+  ["^No matching method (.*) found taking (.*) args for (class )?(.*)$"
+   "No matching method $1, taking $2 arguments, found on $4"]
   ["^Could not locate .*__init.class, ([^/]+)/([^/]+).clj or .*.cljc on classpath.( Please.*)?$"
    "$1.$2 could not be required, possibly due to a missing dependency, or a typo in the namespace name"]
   ["^Could not locate .*__init.class, ([^/]+)/([^/]+)/([^/]+).clj or .*.cljc on classpath.( Please.*)?$"
