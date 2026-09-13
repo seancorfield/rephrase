@@ -50,16 +50,16 @@
     (-> msg
         (as-> msg
               (reduce (fn [msg [pattern replacement]]
-                        (str/replace msg (re-pattern pattern) replacement))
+                        (str/replace (str msg) (re-pattern pattern) replacement))
                       msg inline-types)
           (reduce (fn [msg re]
-                    (str/replace msg (re-pattern re) ""))
+                    (str/replace (str msg) (re-pattern re) ""))
                   msg removals)
           (reduce (fn [msg [pattern replacement class-symbol]]
                     (if (or (nil? class-symbol) ; not tied to a class
                             ;; or the class matches the exception:
                             (= class-symbol (and clazz (symbol clazz))))
-                      (str/replace msg (re-pattern pattern) replacement)
+                      (str/replace (str msg) (re-pattern pattern) replacement)
                       msg))
                   msg ex-messages)))))
 
@@ -83,7 +83,7 @@
         cause-type (if (contains? #{"Exception" "RuntimeException"} simple-class)
                      "" ;; omit, not useful
                      (str " (" simple-class ")"))
-        cause (when cause (str/replace cause #"\n$" ""))
+        cause (when cause (str/replace (str cause) #"\n$" ""))
         symbol (when symbol (clean-sym symbol))]
     (case phase
       :read-source

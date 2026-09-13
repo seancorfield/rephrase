@@ -1,6 +1,7 @@
 # Change Log
 
-1.0.5 in progress
+1.0.5 -- 2026-09-13
+* Handle `nil` exception messages (slightly) better.
 * Expand README to help beginners get started with `rephrase` in their IDE/REPL via [#3](https://github.com/seancorfield/rephrase/pull/3) from [@lread](https://github.com/lread).
 * Update dev/test deps.
 
