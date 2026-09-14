@@ -3,6 +3,7 @@
 1.0.next in progress
 * Full support for Babashka (requires 1.13.222 or later).
 * Full support for Jolt (requires jolt nightly build right now).
+* Switch build to `bb`.
 
 1.0.5 -- 2026-09-13
 * Handle `nil` exception messages (slightly) better.

@@ -1,6 +1,10 @@
-{:paths ["src" "resources"]
+{:paths ["src" "resources" "."]
+ :deps {io.github.babashka/deps-deploy {:mvn/version "0.0.1"}
+        ;; purely for dev purposes:
+        io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}
  :tasks
- {:requires [[clojure.string :as str]]
+ {:requires [build
+             [clojure.string :as str]]
 
   -parse-args {:task
                (let [all?     (some #{"all"} *command-line-args*)
@@ -19,23 +23,16 @@
                         ":dev:optional:test:runner"))))}
 
   test:bb {:extra-paths ["test"]
-           :extra-deps  {io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}
            :task ((requiring-resolve 'lazytest.main/run) [])}
 
   test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
             :task (binding [*command-line-args* (conj *command-line-args* "all")]
                     (run 'test))}
 
-  -snapshot {:doc "Return snapshot options, if requested."
-             :task (->> (if (some #{"snapshot"} *command-line-args*)
-                          [:snapshot true]
-                          [])
-                        (map str))}
-
   ci {:doc "Run the CI pipeline of tests and build the JAR."
       :depends [test:bb test:all]
-      :task (apply shell "clojure -T:build jar" (run '-snapshot))}
+      :exec-fn build/jar}
 
   ci:deploy {:doc "Deploy the JAR we just built to Clojars."
              :depends [ci]
-             :task (apply shell "clojure -T:build deploy" (run '-snapshot))}}}
+             :exec-fn build/deploy}}}

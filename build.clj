@@ -1,6 +1,6 @@
 (ns build
   (:require [clojure.tools.build.api :as b]
-            [deps-deploy.deps-deploy :as dd]))
+            [babashka.deps-deploy :as dd]))
 
 (def lib 'org.corfield/rephrase)
 (defn- the-version [patch] (format "1.0.%s" patch))
