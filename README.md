@@ -46,6 +46,8 @@ See `:ex-messages` in [config.edn](/resources/org/corfield/rephrase/config.edn) 
 [![Slack](https://img.shields.io/badge/slack-rephrase-orange.svg?logo=slack)](https://clojurians.slack.com/app_redirect?channel=rephrase)
 [![Join Slack](https://img.shields.io/badge/slack-join_clojurians-orange.svg?logo=slack)](http://clojurians.net)
 
+Supports Clojure 1.10 or later, Babashka 1.13.222 or later, and Jolt 0.8.8 or later (requires jolt nightly build right now).
+
 ### `rephrase` as REPL Middleware
 
 `rephrase` is injected into your Clojure REPL.

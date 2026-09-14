@@ -33,7 +33,7 @@
                         (map str))}
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
-      :depends [test:all]
+      :depends [test:bb test:all]
       :task (apply shell "clojure -T:build jar" (run '-snapshot))}
 
   ci:deploy {:doc "Deploy the JAR we just built to Clojars."
