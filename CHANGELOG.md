@@ -2,7 +2,7 @@
 
 1.0.next in progress
 * Full support for Babashka (requires 1.13.222 or later).
-* Full support for Jolt (requires jolt nightly build right now).
+* Full support for Jolt (requires 0.8.8 or later, so the nightly build right now).
 * Switch build to `bb`.
 
 1.0.5 -- 2026-09-13
