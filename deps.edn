@@ -16,7 +16,7 @@
 
   :jolt
   {:extra-deps {jolt-lang/nrepl {:git/url "https://github.com/jolt-lang/nrepl"
-                                 :git/tag "v0.1.2" :git/sha "6e8cfa2"}
+                                 :git/tag "v0.2.0" :git/sha "f7ffd37"}
                 org.clojure/spec.alpha {:mvn/version "0.6.249"}}}
 
   :test
