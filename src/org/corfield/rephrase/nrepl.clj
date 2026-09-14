@@ -14,9 +14,6 @@
     (-> msg
         (assoc :nrepl.middleware.caught/caught
                `rephrase/repl-caught)
-        ;; jolt nrepl middleware currently requires this:
-        (assoc :nrepl.middleware.caught/caught-fn
-               rephrase/repl-caught)
         (h))))
 
 (set-descriptor! #'org.corfield.rephrase.nrepl/wrap-rephrase
