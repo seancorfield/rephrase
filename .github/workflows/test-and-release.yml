@@ -21,6 +21,11 @@ jobs:
         with:
           cli: '1.12.6.1673'
           bb: latest
+      - name: Install latest Jolt
+        id: setup-jolt
+        uses: jlt-commons/setup-jolt@v1
+        with:
+          version: 'latest'
       - name: Cache All The Things
         uses: actions/cache@v6
         with:
@@ -30,7 +35,8 @@ jobs:
             ~/.clojure
             ~/.cpcache
             ~/.deps.clj
-          key: ${{ runner.os }}-${{ hashFiles('**/deps.edn', '**/bb.edn') }}
+            ~/.jolt
+          key: ${{ runner.os }}-jolt-${{ steps.setup-jolt.outputs.version }}-${{ hashFiles('**/deps.edn', '**/bb.edn') }}
       - name: Run Tests, Build JAR, and Deploy
         run: bb ci:deploy
         env:

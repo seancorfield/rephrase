@@ -22,7 +22,14 @@
                         (str ":" v)
                         ":dev:optional:test:runner"))))}
 
-  test:bb {:extra-paths ["test"]
+  test:jolt {:doc "Run the test suite on Jolt."
+             :task
+             (do
+               (println "\nTesting Jolt")
+               (shell (str "jolt -M:jolt:dev:test:runner")))}
+
+  test:bb {:doc "Run the test suite on Babashka."
+           :extra-paths ["test"]
            :task ((requiring-resolve 'lazytest.main/run) [])}
 
   test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
@@ -30,7 +37,7 @@
                     (run 'test))}
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
-      :depends [test:bb test:all]
+      :depends [test:bb test:jolt test:all]
       :exec-fn build/jar}
 
   ci:deploy {:doc "Deploy the JAR we just built to Clojars."
