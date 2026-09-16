@@ -1,6 +1,7 @@
 (ns build
-  (:require [clojure.tools.build.api :as b]
-            [babashka.deps-deploy :as dd]))
+  (:require [babashka.deps-deploy :as dd]
+            [babashka.tasks :refer [shell]]
+            [clojure.tools.build.api :as b]))
 
 (def lib 'org.corfield/rephrase)
 (defn- the-version [patch] (format "1.0.%s" patch))
@@ -56,3 +57,23 @@
     (dd/deploy {:installer :remote :artifact (b/resolve-path jar-file)
                 :pom-file (b/pom-path (select-keys opts [:lib :class-dir]))}))
   opts)
+
+;; test-related utilities and tasks:
+
+(defn- get-versions [opts]
+  (if (:all-versions opts) ["1.10" "1.11" "1.12" "1.13"] ["1.10"]))
+
+(defn run-tests "Run tests for the specified Clojure versions."
+  {:org.babashka/cli {:spec {:all-versions {:coerce :boolean}}}}
+  [opts]
+  (let [versions (get-versions opts)]
+    (doseq [v versions]
+      (println "\nTesting Clojure" v)
+      (shell (str "clojure -M"
+                  ":" v
+                  ":dev:optional:test:runner")))))
+
+(defn jolt-tests "Run tests for Jolt."
+  [_]
+  (println "\nTesting Jolt")
+  (shell "jolt -M:jolt:dev:test:runner"))

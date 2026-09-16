@@ -3,38 +3,21 @@
         ;; purely for dev purposes:
         io.github.noahtheduke/lazytest {:mvn/version "2.1.0"}}
  :tasks
- {:requires [build
-             [clojure.string :as str]]
-
-  -parse-args {:task
-               (let [all?     (some #{"all"} *command-line-args*)
-                     versions (or (seq (filter (fn [v] (str/starts-with? v "1."))
-                                               *command-line-args*))
-                                  ["1.10"])]
-                 (if all? ["1.10" "1.11" "1.12" "1.13"] versions))}
+ {:requires [build]
 
   test {:doc "Run the test suite."
-        :task
-        (let [versions (run '-parse-args)]
-          (doseq [v versions]
-            (println "\nTesting Clojure" v)
-            (shell (str "clojure -M"
-                        (str ":" v)
-                        ":dev:optional:test:runner"))))}
+        :exec-fn build/run-tests}
 
   test:jolt {:doc "Run the test suite on Jolt."
-             :task
-             (do
-               (println "\nTesting Jolt")
-               (shell (str "jolt -M:jolt:dev:test:runner")))}
+             :exec-fn build/jolt-tests}
 
   test:bb {:doc "Run the test suite on Babashka."
            :extra-paths ["test"]
-           :task ((requiring-resolve 'lazytest.main/run) [])}
+           :exec-fn lazytest.main/run-impl}
 
-  test:all {:doc "Run all tests for different Clojure versions and ClojureScript"
-            :task (binding [*command-line-args* (conj *command-line-args* "all")]
-                    (run 'test))}
+  test:all {:doc "Run all tests for different Clojure versions."
+            :exec-fn build/run-tests
+            :exec-args {:all-versions true}}
 
   ci {:doc "Run the CI pipeline of tests and build the JAR."
       :depends [test:bb test:jolt test:all]
