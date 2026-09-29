@@ -18,3 +18,8 @@
 
 (set-descriptor! #'org.corfield.rephrase.nrepl/wrap-rephrase
                  {:expects #{#'caught/wrap-caught}})
+
+(def middleware
+  "A vector of rephrase middleware, which may be potentially more
+   convenient for other tooling to use (since it 'hides' the descriptor)."
+  [`wrap-rephrase])

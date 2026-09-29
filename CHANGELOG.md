@@ -1,5 +1,8 @@
 # Change Log
 
+1.0.7 -- 2026-09-29
+* Add `org.corfield.rephrase.nrepl/middleware` for use by CLI tooling.
+
 1.0.6 -- 2026-09-15
 * Full support for Babashka (requires 1.13.222 or later).
 * Full support for Jolt (requires 0.8.8 or later).
