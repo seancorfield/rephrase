@@ -3,7 +3,7 @@
 
  :aliases
  {:optional
-  {:extra-deps {nrepl/nrepl {:mvn/version "1.7.0" :optional true}}}
+  {:extra-deps {nrepl/nrepl {:mvn/version "1.8.0" :optional true}}}
 
   :dev
   {:extra-paths ["dev"]}
@@ -12,12 +12,12 @@
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.4"}}}
   :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.6"}}}
-  :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha7"}}}
+  :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha8"}}}
 
   :jolt
   {:extra-deps {jolt-lang/nrepl {:git/url "https://github.com/jolt-lang/nrepl"
                                  ;;:git/tag "v0.2.0" -- waiting for 0.2.1
-                                 :git/sha "aad8baef0dfe56d288792017841f37321d8160b1"}
+                                 :git/sha "b8de37a33d039fd64a98b2563c42bc9918d27104"}
                 org.clojure/spec.alpha {:mvn/version "0.6.249"}}}
 
   :test

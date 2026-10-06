@@ -4,6 +4,7 @@
 .classpath
 .clj-kondo/.cache
 .clj-kondo/imports/
+.cljconf/org.clojure/clojure-cli.repl/history
 .cpcache
 .eastwood
 .factorypath

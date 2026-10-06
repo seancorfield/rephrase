@@ -1,5 +1,8 @@
 # Change Log
 
+1.0.8 in progress
+* Update dev/test deps.
+
 1.0.7 -- 2026-09-29
 * Add `org.corfield.rephrase.nrepl/middleware` for use by CLI tooling.
 
