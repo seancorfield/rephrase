@@ -64,7 +64,7 @@ Create (or edit) a `deps.edn` with an alias for `rephrase`:
 {:aliases {:rephrase-nrepl-middleware 
            {:extra-deps {org.corfield/rephrase {:mvn/version "1.0.7"}}
             :main-opts  ["-m" "nrepl.cmdline"
-                         "--middleware" "[org.corfield.rephrase.nrepl/wrap-rephrase,cider.nrepl/cider-middleware]"]}}}
+                         "--middleware" "[org.corfield.rephrase.nrepl/middleware,cider.nrepl/cider-middleware]"]}}}
 ```
 
 > [!TIP]
@@ -78,6 +78,8 @@ You can invoke this via the `View`->`Command Palette...` menu or via the `ctrl+a
 4. And then press the `OK` button.
 
 Now when your code generates errors you'll get `rephrase`d error messages!
+
+If you are using the new [Clojure CLI REPL](https://github.com/clojure/clojure-cli.repl), you can add `org.corfield.rephrase.nrepl/middleware` to your `:middleware` vector in your `clojure-cli.repl.edn` configuration file, and either add the `org.corfield/rephrase` dependency to your `:repl` alias (to start the CLI REPL), or add it under a `:rephrase` alias and then include that alias when starting the REPL.
 
 ### `rephrase` when Starting a REPL from code
 
@@ -128,7 +130,9 @@ This allows for more specific rephrasings that only apply to certain exception t
 
 The `rephrase` library provides two main functions:
 * `org.corfield.rephrase/repl-caught` - a replacement for `clojure.main/repl-caught` that rephrases exceptions before printing them (via the `:caught` option when starting a REPL),
-* `org.corfield.rephrase.nrepl/wrap-rephrase` - nREPL middleware that applies `repl-caught` to produce rephrased exceptions in nREPL sessions.
+* `org.corfield.rephrase.nrepl/middleware` - nREPL middleware that applies `repl-caught` to produce rephrased exceptions in nREPL sessions.
+
+> Note: the `middleware` is a vector containing just `org.corfield.rephrase.nrepl/wrap-rephrase` right now. More middleware might be added in future.
 
 There is also a helper function that applications or tools might use:
 * `org.corfield.rephrase/rephrase-err->msg` - a replacement for `clojure.main/err->msg` that takes an exception and returns a rephrased error message string.
