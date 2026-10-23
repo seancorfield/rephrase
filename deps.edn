@@ -12,12 +12,12 @@
   :1.10 {:override-deps {org.clojure/clojure {:mvn/version "1.10.3"}}}
   :1.11 {:override-deps {org.clojure/clojure {:mvn/version "1.11.4"}}}
   :1.12 {:override-deps {org.clojure/clojure {:mvn/version "1.12.6"}}}
-  :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha9"}}}
+  :1.13 {:override-deps {org.clojure/clojure {:mvn/version "1.13.0-alpha10"}}}
 
   :jolt
   {:extra-deps {jolt-lang/nrepl {:git/url "https://github.com/jolt-lang/nrepl"
                                  ;;:git/tag "v0.2.0" -- waiting for 0.2.1
-                                 :git/sha "b8de37a33d039fd64a98b2563c42bc9918d27104"}
+                                 :git/sha "53f9a76ae2aea6d522f797fe644fdbb9eaea6318"}
                 org.clojure/spec.alpha {:mvn/version "0.6.249"}}}
 
   :test
